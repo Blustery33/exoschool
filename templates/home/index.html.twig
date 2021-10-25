@@ -3,9 +3,27 @@
 {% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
+    {% if app.user %}
+        <p>Bonjour {{ app.user.prenom }} voir mon <a href="/profil">profil</a>.</p>
+    {% endif %}
 
- {{ dump(users) }}
-Bonjour je m'appel {{ users.prenom }} voir mon <a href="/profil">profil</a>.
 
-
+    <div class="container d-flex justify-content-end">
+        <div class="row">
+            <div>
+                <p>Liste des utilisateurs :</p>
+                {% for user in users %}
+                    <ul>
+                        <li>
+                            - {{ user.prenom }}  {{ user.nom }}</br>
+                            {% for loisir in user.loisirs %}
+                                Loisirs : {{ loisir.nom }}
+                                (activité : {{ loisir.activities }})
+                            {% endfor %}
+                        </li>
+                    </ul>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 {% endblock %}

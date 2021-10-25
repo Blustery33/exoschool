@@ -43,16 +43,5 @@ class ProfilController extends AbstractController
             'users' => $users,
             'user' => $user,
         ]);
-
-
-        /*if ($this->getUser() === $user->getUserIdentifier()) {
-
-            return $this->render('profil/showLoisir.html.twig', [
-                'user' => $user,
-            ]);
-        } else {
-            $this->addFlash('danger', 'Vous n\'avez pas accès à cette page');
-            return $this->redirectToRoute('profil_loisir_show');
-        }*/
     }
 }
