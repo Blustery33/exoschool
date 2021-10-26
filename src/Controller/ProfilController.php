@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Loisir;
+use App\Form\AddLoisirUserType;
 use App\Repository\LoisirRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManager;
@@ -26,22 +27,28 @@ class ProfilController extends AbstractController
             'user' => $user,
         ]);
     }
-    /*#[ParamConverter('loisir', class: 'App\Entity\Loisir', options: ['LoisirId'=>'id'] )]
-    #[Route('/loisir/{LoisirId}', name: 'loisir_show')]*/
-   /**
-     * @Route("/loisir/{loisirId}", name="loisir_show")
-     * @ParamConverter("loisir", class="App\Entity\Loisir", options={"mapping": {"loisirId": "id"}})
-     */
-    public function getLoisir(UserRepository $userRepository): Response
+
+    #[Route('/new', name: 'new_loisir')]
+    public function newLoisir(\Symfony\Component\HttpFoundation\Request $request): Response
     {
-        $user = new User();
-        $users = $userRepository->findAll();
-        if($this->getUser() === $this->getUser()) {
-            $user->getLoisirs();
+
+        $loisir = new Loisir();
+        $loisir->getUsers(['1']);
+        $form = $this->createForm(AddLoisirUserType::class, $loisir);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $loisir->setActivities($loisir->getActivities());
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($loisir);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('profil_index', [], Response::HTTP_SEE_OTHER);
         }
-        return $this->render('profil/showLoisir.html.twig', [
-            'users' => $users,
-            'user' => $user,
+
+        return $this->render('profil/addLoisirUser.html.twig', [
+            'loisir' => $loisir,
+            'form' => $form->createView(),
         ]);
     }
 }

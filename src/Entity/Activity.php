@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ActivityRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -22,8 +23,11 @@ class Activity
      */
     private $nom;
 
-
-    public function __toString()
+    public function __construct()
+    {
+        $this->nom = new ArrayCollection();
+    }
+    public function __toString(): string
     {
         return $this->nom;
     }

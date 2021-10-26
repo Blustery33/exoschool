@@ -15,7 +15,7 @@
                 {% for user in users %}
                     <ul>
                         <li>
-                            - {{ user.prenom }}  {{ user.nom }}</br>
+                            - {{ user.prenom }}  {{ user.nom }} </br>
                             {% for loisir in user.loisirs %}
                                 Loisirs : {{ loisir.nom }}
                                 (activité : {{ loisir.activities }})

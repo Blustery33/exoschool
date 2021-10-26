@@ -13,12 +13,12 @@ class HomeController extends AbstractController
     #[Route('/', name: 'home')]
     public function index(LoisirRepository $loisirRepository, UserRepository $userRepository): Response
     {
-        /*$loisirs = $loisirRepository->findAll();*/
+        $loisirs = $loisirRepository->findAll();
         $users = $userRepository->findAll();
         $user = $this->getUser();
 
         return $this->render('home/index.html.twig', [
-            /*'loisirs' => $loisirs,*/
+            'loisirs' => $loisirs,
             'users' => $users,
             'user' => $user,
         ]);
