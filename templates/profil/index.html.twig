@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProfilController!{% endblock %}
+
+{% block body %}
+    {{ dump(user) }}
+    <p>Bienvenue sur ta page {{ user.prenom }}</p>
+    {#<div>Voir mes <a href="{{ path('loisir_show') }}">loisirs</a></div>.#}
+    <div>Ajouter un <a href="{{ path('loisir_new') }}">loisirs</a></div>.
+{% endblock %}

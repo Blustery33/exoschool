@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Loisir index{% endblock %}
+
+{% block body %}
+    <h1>Loisir index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for loisir in loisirs %}
+            <tr>
+                <td>{{ loisir.id }}</td>
+                <td>{{ loisir.nom }}</td>
+                <td>
+                    <a href="{{ path('loisir_show', {'id': loisir.id}) }}">show</a>
+                    <a href="{{ path('loisir_edit', {'id': loisir.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('loisir_new') }}">Create new</a>
+{% endblock %}
